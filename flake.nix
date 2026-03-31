@@ -1,61 +1,32 @@
 {
+  description = "ZeroClaw — Nix-focused fork with NixOS module";
+
   inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = { flake-utils, fenix, nixpkgs, ... }:
+  outputs = { self, nixpkgs, ... }:
     let
-      nixosModule = { pkgs, ... }: {
-        nixpkgs.overlays = [ fenix.overlays.default ];
-        environment.systemPackages = [
-          (pkgs.fenix.stable.withComponents [
-            "cargo"
-            "clippy"
-            "rust-src"
-            "rustc"
-            "rustfmt"
-          ])
-          pkgs.rust-analyzer
-        ];
-      };
+      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
     in
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [ fenix.overlays.default ];
-        };
-        rustToolchain = pkgs.fenix.stable.withComponents [
-          "cargo"
-          "clippy"
-          "rust-src"
-          "rustc"
-          "rustfmt"
-        ];
-      in {
-        packages.default = fenix.packages.${system}.stable.toolchain;
-        devShells.default = pkgs.mkShell {
-          packages = [
-            rustToolchain
-            pkgs.rust-analyzer
-          ];
-        };
-      }) // {
-      nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [ nixosModule ];
-        };
+    {
+      packages = forAllSystems (system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          zeroclaw-web = pkgs.callPackage ./nix/web.nix {};
 
-        nixos-aarch64 = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          modules = [ nixosModule ];
-        };
-      };
+          zeroclaw = pkgs.callPackage ./nix/package.nix {
+            zeroclaw-web = self.packages.${system}.zeroclaw-web;
+          };
+
+          zeroclaw-desktop = pkgs.callPackage ./nix/desktop.nix {};
+
+          default = self.packages.${system}.zeroclaw;
+        });
+
+      nixosModules.default = ./nix/module.nix;
     };
 }
