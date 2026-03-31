@@ -475,6 +475,24 @@ impl EmailChannel {
                 continue;
             }
 
+            // Skip emails from noreply/no-reply addresses and bounce daemons
+            {
+                let sender_lower = email.sender.to_ascii_lowercase();
+                let dominated = sender_lower.split('@').next().unwrap_or("");
+                if dominated == "noreply"
+                    || dominated == "no-reply"
+                    || dominated == "donotreply"
+                    || dominated == "do-not-reply"
+                    || dominated == "do_not_reply"
+                    || dominated == "mailer-daemon"
+                    || dominated == "postmaster"
+                    || dominated.starts_with("bounce")
+                {
+                    info!("Ignoring automated email from {}", email.sender);
+                    continue;
+                }
+            }
+
             let is_new = {
                 let mut seen = self.seen_messages.lock().await;
                 seen.insert(email.msg_id.clone())
