@@ -345,6 +345,131 @@ pub async fn check_sop_cron_triggers(
     all_results
 }
 
+// ── SOP failure notification via Pushover ────────────────────────────────
+
+/// Send a Pushover notification for SOP failure (fire-and-forget).
+fn notify_sop_failure(sop_name: &str, reason: &str) {
+    let user_key = match std::env::var("PUSHOVER_USER_KEY") {
+        Ok(k) if !k.is_empty() => k,
+        _ => return,
+    };
+    let api_token = match std::env::var("PUSHOVER_API_TOKEN") {
+        Ok(t) if !t.is_empty() => t,
+        _ => return,
+    };
+
+    let sop_name = sop_name.to_string();
+    let title = format!("SOP Failed: {sop_name}");
+    let message = reason.to_string();
+
+    tokio::spawn(async move {
+        let client = reqwest::Client::new();
+        if let Err(e) = client
+            .post("https://api.pushover.net/1/messages.json")
+            .form(&[
+                ("token", api_token.as_str()),
+                ("user", user_key.as_str()),
+                ("title", title.as_str()),
+                ("message", message.as_str()),
+            ])
+            .send()
+            .await
+        {
+            tracing::warn!("Failed to send Pushover notification for SOP '{sop_name}': {e}");
+        }
+    });
+}
+
+// ── Autonomous SOP execution via provider override ──────────────────────
+
+/// Execute all steps of an SOP run autonomously using a dedicated provider.
+pub async fn execute_sop_with_provider(
+    engine: &mut super::engine::SopEngine,
+    run_id: &str,
+    sop: &super::types::Sop,
+    first_step: super::types::SopStep,
+) {
+    let provider_name = match &sop.provider {
+        Some(p) => p.clone(),
+        None => return,
+    };
+    let model = sop.model.clone().unwrap_or_else(|| "claude-haiku-4-5".into());
+
+    let provider = match crate::providers::create_provider(&provider_name, None) {
+        Ok(p) => p,
+        Err(e) => {
+            let reason = format!("Failed to create provider '{}': {e}", provider_name);
+            tracing::error!("SOP '{}' run {run_id}: {reason}", sop.name);
+            notify_sop_failure(&sop.name, &reason);
+            return;
+        }
+    };
+
+    let mut current_step = first_step;
+    loop {
+        let step_prompt = format!(
+            "You are executing step {} of SOP '{}'.\n\n\
+             ## Step: {}\n\n{}\n\n\
+             Execute this step and return the result. Be precise and structured.",
+            current_step.number, sop.name, current_step.title, current_step.body,
+        );
+
+        let started_at = chrono::Utc::now().to_rfc3339();
+        let result = provider
+            .chat_with_system(
+                Some(&format!("You are a task executor for SOP '{}'.", sop.name)),
+                &step_prompt,
+                &model,
+                0.3,
+            )
+            .await;
+
+        let (status, output) = match result {
+            Ok(text) => (super::types::SopStepStatus::Completed, text),
+            Err(e) => (
+                super::types::SopStepStatus::Failed,
+                format!("Provider error: {e}"),
+            ),
+        };
+
+        let step_result = super::types::SopStepResult {
+            step_number: current_step.number,
+            status: status.clone(),
+            output,
+            started_at,
+            completed_at: Some(chrono::Utc::now().to_rfc3339()),
+        };
+
+        match engine.advance_step(run_id, step_result) {
+            Ok(super::types::SopRunAction::ExecuteStep { step, .. }) => {
+                current_step = step;
+            }
+            Ok(super::types::SopRunAction::Completed { sop_name, .. }) => {
+                tracing::info!("SOP '{sop_name}' run {run_id} completed autonomously");
+                return;
+            }
+            Ok(super::types::SopRunAction::Failed { sop_name, reason, .. }) => {
+                tracing::error!("SOP '{sop_name}' run {run_id} failed: {reason}");
+                notify_sop_failure(&sop_name, &reason);
+                return;
+            }
+            Ok(other) => {
+                tracing::warn!(
+                    "SOP '{}' run {run_id} unexpected action: {other:?}",
+                    sop.name
+                );
+                return;
+            }
+            Err(e) => {
+                let reason = format!("Step advance error: {e}");
+                tracing::error!("SOP '{}' run {run_id}: {reason}", sop.name);
+                notify_sop_failure(&sop.name, &reason);
+                return;
+            }
+        }
+    }
+}
+
 // ── Tests ───────────────────────────────────────────────────────
 
 #[cfg(test)]

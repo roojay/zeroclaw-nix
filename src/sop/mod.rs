@@ -123,6 +123,8 @@ fn load_sop(sop_dir: &Path, default_execution_mode: SopExecutionMode) -> Result<
         cooldown_secs,
         max_concurrent,
         deterministic,
+        provider,
+        model,
     } = manifest.sop;
 
     // When deterministic=true, override execution_mode to Deterministic
@@ -144,6 +146,8 @@ fn load_sop(sop_dir: &Path, default_execution_mode: SopExecutionMode) -> Result<
         max_concurrent,
         location: Some(sop_dir.to_path_buf()),
         deterministic,
+        provider,
+        model,
     })
 }
 

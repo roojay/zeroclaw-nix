@@ -173,6 +173,12 @@ pub struct Sop {
     pub cooldown_secs: u64,
     #[serde(default = "default_max_concurrent")]
     pub max_concurrent: u32,
+    /// Optional provider override for headless execution.
+    #[serde(default)]
+    pub provider: Option<String>,
+    /// Optional model override (used with provider).
+    #[serde(default)]
+    pub model: Option<String>,
     #[serde(skip)]
     pub location: Option<PathBuf>,
     /// When true, sets execution_mode to Deterministic.
@@ -214,6 +220,10 @@ pub(crate) struct SopMeta {
     pub cooldown_secs: u64,
     #[serde(default = "default_max_concurrent")]
     pub max_concurrent: u32,
+    #[serde(default)]
+    pub provider: Option<String>,
+    #[serde(default)]
+    pub model: Option<String>,
     /// Opt-in deterministic execution (no LLM round-trips between steps).
     #[serde(default)]
     pub deterministic: bool,
