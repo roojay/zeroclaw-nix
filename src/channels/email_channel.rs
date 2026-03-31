@@ -70,6 +70,9 @@ pub struct EmailConfig {
     /// Default subject line for outgoing emails (default: "ZeroClaw Message")
     #[serde(default = "default_subject")]
     pub default_subject: String,
+    /// IMAP folder name for saving sent messages (default: "Sent")
+    #[serde(default = "default_sent_folder")]
+    pub sent_folder: String,
 }
 
 impl crate::config::traits::ChannelConfig for EmailConfig {
@@ -99,6 +102,9 @@ fn default_true() -> bool {
 fn default_subject() -> String {
     "ZeroClaw Message".into()
 }
+fn default_sent_folder() -> String {
+    "Sent".into()
+}
 
 impl Default for EmailConfig {
     fn default() -> Self {
@@ -115,6 +121,7 @@ impl Default for EmailConfig {
             idle_timeout_secs: default_idle_timeout(),
             allowed_senders: Vec::new(),
             default_subject: default_subject(),
+            sent_folder: default_sent_folder(),
         }
     }
 }
@@ -576,6 +583,25 @@ impl Channel for EmailChannel {
         let transport = self.create_smtp_transport()?;
         transport.send(&email)?;
         info!("Email sent to {}", message.recipient);
+
+        // Save copy to IMAP Sent folder (best-effort, non-fatal)
+        if !self.config.sent_folder.is_empty() {
+            let raw_email = email.formatted();
+            match self.connect_imap().await {
+                Ok(mut imap_session) => {
+                    match imap_session
+                        .append(&self.config.sent_folder, Some("\\Seen"), None, &raw_email)
+                        .await
+                    {
+                        Ok(_) => debug!("Saved to {} folder", self.config.sent_folder),
+                        Err(e) => warn!("Failed to save to {}: {}", self.config.sent_folder, e),
+                    }
+                    let _ = imap_session.logout().await;
+                }
+                Err(e) => warn!("IMAP connect for Sent save failed: {}", e),
+            }
+        }
+
         Ok(())
     }
 
