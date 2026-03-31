@@ -277,6 +277,7 @@ in
       preStart = ''
         # Copy base config (no secrets) from nix store to writable state dir
         mkdir -p ${zeroclawDir}
+        rm -f ${zeroclawDir}/config.toml
         cp --no-preserve=mode ${configWithPlaceholders} ${zeroclawDir}/config.toml
         chmod 0600 ${zeroclawDir}/config.toml
 
