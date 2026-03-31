@@ -476,6 +476,13 @@ impl EmailChannel {
                 continue;
             }
 
+            // Extract subject for reply threading
+            let _email_subj = if email.content.starts_with("Subject: ") {
+                email.content.lines().next()
+                    .map(|l| l.trim_start_matches("Subject: ").to_string())
+            } else {
+                None
+            };
             let msg = ChannelMessage {
                 id: email.msg_id,
                 reply_target: email.sender.clone(),
@@ -483,7 +490,7 @@ impl EmailChannel {
                 content: email.content,
                 channel: "email".to_string(),
                 timestamp: email.timestamp,
-                thread_ts: None,
+                thread_ts: _email_subj,
                 interruption_scope_id: None,
                 attachments: vec![],
             };
@@ -537,8 +544,10 @@ impl Channel for EmailChannel {
     }
 
     async fn send(&self, message: &SendMessage) -> Result<()> {
-        // Use explicit subject if provided, otherwise fall back to legacy parsing or default
+        // Use explicit subject if provided, otherwise fall back to legacy parsing,
+        // thread subject (for email replies), or default
         let default_subject = self.config.default_subject.as_str();
+        let _thread_subject;
         let (subject, body) = if let Some(ref subj) = message.subject {
             (subj.as_str(), message.content.as_str())
         } else if message.content.starts_with("Subject: ") {
@@ -547,6 +556,13 @@ impl Channel for EmailChannel {
             } else {
                 (default_subject, message.content.as_str())
             }
+        } else if let Some(ref ts) = message.thread_ts {
+            _thread_subject = if ts.starts_with("Re: ") {
+                ts.clone()
+            } else {
+                format!("Re: {}", ts)
+            };
+            (_thread_subject.as_str(), message.content.as_str())
         } else {
             (default_subject, message.content.as_str())
         };
