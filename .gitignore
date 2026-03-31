@@ -51,4 +51,6 @@ lcov.info
 .idea
 
 # Wrangler cache
-.wrangler/.direnv
+.wrangler/
+.direnv/
+result
