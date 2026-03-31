@@ -1045,6 +1045,11 @@ pub fn all_tools_with_runtime(
         )));
     }
 
+    // XMPP tools (conditionally registered when XMPP channel is configured)
+    if root_config.channels_config.xmpp.is_some() {
+        tool_arcs.extend(crate::channels::xmpp::xmpp_tools());
+    }
+
     (
         boxed_registry_from_arcs(tool_arcs),
         delegate_handle,

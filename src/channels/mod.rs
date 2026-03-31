@@ -62,6 +62,7 @@ pub mod whatsapp;
 pub mod whatsapp_storage;
 #[cfg(feature = "whatsapp-web")]
 pub mod whatsapp_web;
+pub mod xmpp;
 
 pub use bluesky::BlueskyChannel;
 pub use clawdtalk::{ClawdTalkChannel, ClawdTalkConfig};
@@ -103,6 +104,7 @@ pub use wecom::WeComChannel;
 pub use whatsapp::WhatsAppChannel;
 #[cfg(feature = "whatsapp-web")]
 pub use whatsapp_web::WhatsAppWebChannel;
+pub use xmpp::XmppChannel;
 
 use crate::agent::loop_::{
     build_tool_instructions, clear_model_switch_request, get_model_switch_state,
@@ -4763,6 +4765,13 @@ fn collect_configured_channels(
                 wh.auth_header.clone(),
                 wh.secret.clone(),
             )),
+        });
+    }
+
+    if let Some(ref xmpp_cfg) = config.channels_config.xmpp {
+        channels.push(ConfiguredChannel {
+            display_name: "XMPP",
+            channel: Arc::new(XmppChannel::new(xmpp_cfg)),
         });
     }
 

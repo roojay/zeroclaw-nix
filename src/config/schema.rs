@@ -6101,6 +6101,8 @@ pub struct ChannelsConfig {
     pub reddit: Option<RedditConfig>,
     /// Bluesky channel configuration (AT Protocol).
     pub bluesky: Option<BlueskyConfig>,
+    /// XMPP channel configuration.
+    pub xmpp: Option<crate::channels::xmpp::XmppConfig>,
     /// Voice call channel configuration (Twilio/Telnyx/Plivo).
     pub voice_call: Option<crate::channels::voice_call::VoiceCallConfig>,
     /// Voice wake word detection channel configuration.
@@ -6296,6 +6298,7 @@ impl Default for ChannelsConfig {
             clawdtalk: None,
             reddit: None,
             bluesky: None,
+            xmpp: None,
             voice_call: None,
             #[cfg(feature = "voice-wake")]
             voice_wake: None,
