@@ -7,8 +7,7 @@
 buildNpmPackage {
   pname = "zeroclaw-web";
   version = "0.6.5";
-  src = ./..;
-  sourceRoot = "source/web";
+  src = ../web;
 
   npmDepsHash = "sha256-RMiFoPj4cbUYONURsCp4FrNuy9bR1eRWqgAnACrVXsI=";
 
