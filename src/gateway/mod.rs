@@ -891,6 +891,7 @@ pub async fn run_gateway(host: &str, port: u16, config: Config) -> Result<()> {
         .route("/admin/paircode/new", post(handle_admin_paircode_new))
         // ── Existing routes ──
         .route("/health", get(handle_health))
+        .route("/v1/models", get(handle_models))
         .route("/metrics", get(handle_metrics))
         .route("/pair", post(handle_pair))
         .route("/pair/code", get(handle_pair_code))
@@ -1318,6 +1319,11 @@ async fn run_gateway_chat_with_tools(
 #[derive(serde::Deserialize)]
 pub struct WebhookBody {
     pub message: String,
+}
+
+async fn handle_models() -> impl axum::response::IntoResponse {
+    ([("content-type", "application/json")],
+     r#"{"object":"list","data":[{"id":"sid","object":"model"}]}"#)
 }
 
 /// POST /webhook — main webhook endpoint
