@@ -462,6 +462,12 @@ impl EmailChannel {
                 continue;
             }
 
+            // Skip emails from self (prevent reply loops)
+            if email.sender.eq_ignore_ascii_case(&self.config.from_address) {
+                info!("Ignoring email from self ({})", email.sender);
+                continue;
+            }
+
             let is_new = {
                 let mut seen = self.seen_messages.lock().await;
                 seen.insert(email.msg_id.clone())
