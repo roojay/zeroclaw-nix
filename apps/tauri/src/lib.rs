@@ -108,6 +108,19 @@ pub fn run() {
             // Set up the system tray.
             let _ = tray::setup_tray(app);
 
+            // Navigate the WebView to the configured gateway URL.
+            // This overrides the default from tauri.conf.json, allowing
+            // ZEROCLAW_GATEWAY_URL to control the target at runtime.
+            if let Some(window) = app.get_webview_window("main") {
+                let gw_url = {
+                    let s = shared.blocking_read();
+                    format!("{}/_app/", s.gateway_url)
+                };
+                if let Ok(url) = gw_url.parse() {
+                    let _ = window.navigate(url);
+                }
+            }
+
             // Auto-pair with gateway and inject token into the WebView.
             let app_handle = app.handle().clone();
             let pair_state = shared.clone();

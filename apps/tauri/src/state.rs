@@ -23,8 +23,10 @@ pub struct AppState {
 
 impl Default for AppState {
     fn default() -> Self {
+        let gateway_url = std::env::var("ZEROCLAW_GATEWAY_URL")
+            .unwrap_or_else(|_| "http://127.0.0.1:42617".to_string());
         Self {
-            gateway_url: "http://127.0.0.1:42617".to_string(),
+            gateway_url,
             token: None,
             connected: false,
             agent_status: AgentStatus::Idle,
