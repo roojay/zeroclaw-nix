@@ -1,3 +1,18 @@
+# zeroclaw-nix
+
+Nix-focused fork of ZeroClaw with NixOS module, feature patches as commits, and flake packaging.
+
+**Quick start**: `nix build github:kcalvelli/zeroclaw-nix` — see [SYNC.md](SYNC.md) for upstream sync workflow.
+
+| Branch | Purpose |
+|--------|---------|
+| `main` | Default. Release tag + nix packaging + feature patches. |
+| `upstream/master` | Read-only mirror of zeroclaw-labs master. |
+
+Fork-specific commits: `git log upstream/master..main --oneline`
+
+---
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/zeroclaw-labs/zeroclaw/master/docs/assets/zeroclaw-banner.png" alt="ZeroClaw" width="600" />
 </p>
