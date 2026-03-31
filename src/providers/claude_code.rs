@@ -135,6 +135,7 @@ impl ClaudeCodeProvider {
     async fn invoke_cli(&self, message: &str, model: &str) -> anyhow::Result<String> {
         let mut cmd = Command::new(&self.binary_path);
         cmd.arg("--print");
+        cmd.arg("--dangerously-skip-permissions");
 
         if Self::should_forward_model(model) {
             cmd.arg("--model").arg(model);
