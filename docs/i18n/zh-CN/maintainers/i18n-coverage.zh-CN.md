@@ -18,33 +18,25 @@
 
 ## 语言区域覆盖率矩阵
 
-| 语言区域 | 根 README | 规范文档中心 | 命令参考 | 配置参考 | 故障排除 | 状态 |
-|---|---|---|---|---|---|---|
-| `en` | `README.md` | `docs/README.md` | `docs/commands-reference.md` | `docs/config-reference.md` | `docs/troubleshooting.md` | 权威来源 |
-| `zh-CN` | `README.zh-CN.md` | `docs/README.zh-CN.md` | - | - | - | 中心级本地化 |
-| `ja` | `README.ja.md` | `docs/README.ja.md` | - | - | - | 中心级本地化 |
-| `ru` | `README.ru.md` | `docs/README.ru.md` | - | - | - | 中心级本地化 |
-| `fr` | `README.fr.md` | `docs/README.fr.md` | - | - | - | 中心级本地化 |
-| `vi` | `README.vi.md` | `docs/i18n/vi/README.md` | `docs/i18n/vi/commands-reference.md` | `docs/i18n/vi/config-reference.md` | `docs/i18n/vi/troubleshooting.md` | 完整树本地化 |
+| 语言区域 | 根 README         | 规范文档中心           | 命令参考                     | 配置参考                   | 故障排除                  | 状态         |
+| -------- | ----------------- | ---------------------- | ---------------------------- | -------------------------- | ------------------------- | ------------ |
+| `en`     | `README.md`       | `docs/README.md`       | `docs/commands-reference.md` | `docs/config-reference.md` | `docs/troubleshooting.md` | 权威来源     |
+| `zh-CN`  | `README.zh-CN.md` | `docs/README.zh-CN.md` | -                            | -                          | -                         | 中心级本地化 |
 
 ## 根 README 完整性
 
 并非所有根 README 都是 `README.md` 的完整翻译：
 
-| 语言区域 | 风格 | 近似覆盖率 |
-|---|---|---|
-| `en` | 完整来源 | 100% |
-| `zh-CN` | 中心式入口点 | ~26% |
-| `ja` | 中心式入口点 | ~26% |
-| `ru` | 中心式入口点 | ~26% |
-| `fr` | 接近完整翻译 | ~90% |
-| `vi` | 接近完整翻译 | ~90% |
+| 语言区域 | 风格         | 近似覆盖率 |
+| -------- | ------------ | ---------- |
+| `en`     | 完整来源     | 100%       |
+| `zh-CN`  | 中心式入口点 | ~26%       |
 
 中心式入口点提供快速入门指南和语言导航，但不复制完整的英文 README 内容。这是准确的状态记录，而非需要立即解决的缺口。
 
 ## 分类索引国际化
 
-分类目录（`docs/getting-started/`、`docs/reference/`、`docs/operations/`、`docs/security/`、`docs/hardware/`、`docs/contributing/`、`docs/project/`）下的本地化 `README.md` 文件目前仅存在英文和越南文版本。其他语言的分类索引本地化将延后处理。
+分类目录（`docs/getting-started/`、`docs/reference/`、`docs/operations/`、`docs/security/`、`docs/hardware/`、`docs/contributing/`、`docs/project/`）下的本地化 `README.md` 文件目前仅存在英文和中文版本。其他语言的分类索引本地化将延后处理。
 
 ## 本地化规则
 

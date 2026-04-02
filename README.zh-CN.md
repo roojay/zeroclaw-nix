@@ -29,36 +29,7 @@
 <p align="center">
   🌐 <strong>Languages:</strong>
   <a href="README.md">🇺🇸 English</a> ·
-  <a href="README.zh-CN.md">🇨🇳 简体中文</a> ·
-  <a href="README.ja.md">🇯🇵 日本語</a> ·
-  <a href="README.ko.md">🇰🇷 한국어</a> ·
-  <a href="README.vi.md">🇻🇳 Tiếng Việt</a> ·
-  <a href="README.tl.md">🇵🇭 Tagalog</a> ·
-  <a href="README.es.md">🇪🇸 Español</a> ·
-  <a href="README.pt.md">🇧🇷 Português</a> ·
-  <a href="README.it.md">🇮🇹 Italiano</a> ·
-  <a href="README.de.md">🇩🇪 Deutsch</a> ·
-  <a href="README.fr.md">🇫🇷 Français</a> ·
-  <a href="README.ar.md">🇸🇦 العربية</a> ·
-  <a href="README.hi.md">🇮🇳 हिन्दी</a> ·
-  <a href="README.ru.md">🇷🇺 Русский</a> ·
-  <a href="README.bn.md">🇧🇩 বাংলা</a> ·
-  <a href="README.he.md">🇮🇱 עברית</a> ·
-  <a href="README.pl.md">🇵🇱 Polski</a> ·
-  <a href="README.cs.md">🇨🇿 Čeština</a> ·
-  <a href="README.nl.md">🇳🇱 Nederlands</a> ·
-  <a href="README.tr.md">🇹🇷 Türkçe</a> ·
-  <a href="README.uk.md">🇺🇦 Українська</a> ·
-  <a href="README.id.md">🇮🇩 Bahasa Indonesia</a> ·
-  <a href="README.th.md">🇹🇭 ไทย</a> ·
-  <a href="README.ur.md">🇵🇰 اردو</a> ·
-  <a href="README.ro.md">🇷🇴 Română</a> ·
-  <a href="README.sv.md">🇸🇪 Svenska</a> ·
-  <a href="README.el.md">🇬🇷 Ελληνικά</a> ·
-  <a href="README.hu.md">🇭🇺 Magyar</a> ·
-  <a href="README.fi.md">🇫🇮 Suomi</a> ·
-  <a href="README.da.md">🇩🇰 Dansk</a> ·
-  <a href="README.nb.md">🇳🇴 Norsk</a>
+  <a href="README.zh-CN.md">🇨🇳 简体中文</a>
 </p>
 
 ZeroClaw 是一个运行在你自己设备上的个人AI助手。它在你已经使用的频道上回复你（WhatsApp、Telegram、Slack、Discord、Signal、iMessage、Matrix、IRC、Email、Bluesky、Nostr、Mattermost、Nextcloud Talk、DingTalk、Lark、QQ、Reddit、LinkedIn、Twitter、MQTT、WeChat Work 等）。它有一个用于实时控制的网页仪表板，可以连接硬件外设（ESP32、STM32、Arduino、Raspberry Pi）。Gateway 只是控制平面——产品是助手本身。
@@ -181,11 +152,11 @@ ZeroClaw 连接到真实的消息平台。将入站 DM 视为不可信输入。
 
 **自主级别：**
 
-| 级别 | 行为 |
-|------|------|
-| `ReadOnly` | 代理可以观察但不能操作 |
+| 级别                 | 行为                          |
+| -------------------- | ----------------------------- |
+| `ReadOnly`           | 代理可以观察但不能操作        |
 | `Supervised`（默认） | 代理在中/高风险操作时需要批准 |
-| `Full` | 代理在策略范围内自主操作 |
+| `Full`               | 代理在策略范围内自主操作      |
 
 **沙箱层：** 工作区隔离、路径遍历阻止、命令允许列表、禁止路径（`/etc`、`/root`、`~/.ssh`）、速率限制（每小时最大操作数、每日成本上限）。
 
@@ -196,11 +167,11 @@ ZeroClaw 连接到真实的消息平台。将入站 DM 视为不可信输入。
 
 使用此面板发布重要通知（破坏性更改、安全公告、维护窗口和发布阻塞问题）。
 
-| 日期 (UTC) | 级别 | 通知 | 操作 |
-| ---------- | ---- | ---- | ---- |
-| 2026-02-19 | _严重_ | 我们与 `openagen/zeroclaw`、`zeroclaw.org` 或 `zeroclaw.net` **无任何关联**。`zeroclaw.org` 和 `zeroclaw.net` 域名目前指向 `openagen/zeroclaw` 分支，该域名/仓库正在冒充我们的官方网站/项目。 | 不要信任来自这些来源的信息、二进制文件、筹款或公告。仅使用[本仓库](https://github.com/zeroclaw-labs/zeroclaw)和我们经过验证的社交账号。 |
-| 2026-02-21 | _重要_ | 我们的官方网站现已上线：[zeroclawlabs.ai](https://zeroclawlabs.ai)。感谢您在我们准备发布期间的耐心等待。我们仍然看到冒充行为，因此**不要**加入任何声称使用 ZeroClaw 名义的投资或筹款活动，除非它是通过我们的官方渠道发布的。 | 使用[本仓库](https://github.com/zeroclaw-labs/zeroclaw)作为唯一信息来源。关注 [X (@zeroclawlabs)](https://x.com/zeroclawlabs?s=21)、[Facebook (Group)](https://www.facebook.com/groups/zeroclawlabs) 和 [Reddit (r/zeroclawlabs)](https://www.reddit.com/r/zeroclawlabs/) 获取官方更新。 |
-| 2026-02-19 | _重要_ | Anthropic 于 2026-02-19 更新了认证和凭证使用条款。Claude Code OAuth 令牌（Free、Pro、Max）仅供 Claude Code 和 Claude.ai 专用；在任何其他产品、工具或服务（包括 Agent SDK）中使用 Claude Free/Pro/Max 的 OAuth 令牌是不允许的，可能违反消费者服务条款。 | 请暂时避免 Claude Code OAuth 集成以防止潜在损失。原始条款：[Authentication and Credential Use](https://code.claude.com/docs/en/legal-and-compliance#authentication-and-credential-use)。 |
+| 日期 (UTC) | 级别   | 通知                                                                                                                                                                                                                                                   | 操作                                                                                                                                                                                                                                                                                     |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-02-19 | _严重_ | 我们与 `openagen/zeroclaw`、`zeroclaw.org` 或 `zeroclaw.net` **无任何关联**。`zeroclaw.org` 和 `zeroclaw.net` 域名目前指向 `openagen/zeroclaw` 分支，该域名/仓库正在冒充我们的官方网站/项目。                                                          | 不要信任来自这些来源的信息、二进制文件、筹款或公告。仅使用[本仓库](https://github.com/zeroclaw-labs/zeroclaw)和我们经过验证的社交账号。                                                                                                                                                  |
+| 2026-02-21 | _重要_ | 我们的官方网站现已上线：[zeroclawlabs.ai](https://zeroclawlabs.ai)。感谢您在我们准备发布期间的耐心等待。我们仍然看到冒充行为，因此**不要**加入任何声称使用 ZeroClaw 名义的投资或筹款活动，除非它是通过我们的官方渠道发布的。                           | 使用[本仓库](https://github.com/zeroclaw-labs/zeroclaw)作为唯一信息来源。关注 [X (@zeroclawlabs)](https://x.com/zeroclawlabs?s=21)、[Facebook (Group)](https://www.facebook.com/groups/zeroclawlabs) 和 [Reddit (r/zeroclawlabs)](https://www.reddit.com/r/zeroclawlabs/) 获取官方更新。 |
+| 2026-02-19 | _重要_ | Anthropic 于 2026-02-19 更新了认证和凭证使用条款。Claude Code OAuth 令牌（Free、Pro、Max）仅供 Claude Code 和 Claude.ai 专用；在任何其他产品、工具或服务（包括 Agent SDK）中使用 Claude Free/Pro/Max 的 OAuth 令牌是不允许的，可能违反消费者服务条款。 | 请暂时避免 Claude Code OAuth 集成以防止潜在损失。原始条款：[Authentication and Credential Use](https://code.claude.com/docs/en/legal-and-compliance#authentication-and-credential-use)。                                                                                                 |
 
 ## 亮点
 
@@ -230,13 +201,13 @@ ZeroClaw 连接到真实的消息平台。将入站 DM 视为不可信输入。
 
 本地机器快速基准测试（macOS arm64，2026年2月），针对 0.8GHz 边缘硬件标准化。
 
-|                           | OpenClaw      | NanoBot        | PicoClaw        | ZeroClaw 🦀          |
-| ------------------------- | ------------- | -------------- | --------------- | -------------------- |
-| **语言**                  | TypeScript    | Python         | Go              | **Rust**             |
-| **RAM**                   | > 1GB         | > 100MB        | < 10MB          | **< 5MB**            |
-| **启动时间（0.8GHz 核心）** | > 500s        | > 30s          | < 1s            | **< 10ms**           |
-| **二进制大小**            | ~28MB (dist)  | N/A (Scripts)  | ~8MB            | **~8.8 MB**          |
-| **成本**                  | Mac Mini $599 | Linux SBC ~$50 | Linux Board $10 | **任何硬件 $10**     |
+|                             | OpenClaw      | NanoBot        | PicoClaw        | ZeroClaw 🦀      |
+| --------------------------- | ------------- | -------------- | --------------- | ---------------- |
+| **语言**                    | TypeScript    | Python         | Go              | **Rust**         |
+| **RAM**                     | > 1GB         | > 100MB        | < 10MB          | **< 5MB**        |
+| **启动时间（0.8GHz 核心）** | > 500s        | > 30s          | < 1s            | **< 10ms**       |
+| **二进制大小**              | ~28MB (dist)  | N/A (Scripts)  | ~8MB            | **~8.8 MB**      |
+| **成本**                    | Mac Mini $599 | Linux SBC ~$50 | Linux Board $10 | **任何硬件 $10** |
 
 > 注意：ZeroClaw 的结果使用 `/usr/bin/time -l` 在发布构建上测量。OpenClaw 需要 Node.js 运行时（通常约 390MB 额外内存开销），而 NanoBot 需要 Python 运行时。PicoClaw 和 ZeroClaw 是静态二进制文件。上述 RAM 数据为运行时内存；构建时编译需求更高。
 
@@ -288,13 +259,13 @@ React 19 + Vite 6 + Tailwind CSS 4 网页仪表板直接从 Gateway 提供：
 
 ### 固件目标
 
-| 目标 | 平台 | 用途 |
-|------|------|------|
-| ESP32 | Espressif ESP32 | 无线外设代理 |
-| ESP32-UI | ESP32 + Display | 带可视化界面的代理 |
-| STM32 Nucleo | STM32 (ARM Cortex-M) | 工业外设 |
-| Arduino | Arduino | 基础传感器/执行器桥接 |
-| Uno Q Bridge | Arduino Uno | 到代理的串口桥接 |
+| 目标         | 平台                 | 用途                  |
+| ------------ | -------------------- | --------------------- |
+| ESP32        | Espressif ESP32      | 无线外设代理          |
+| ESP32-UI     | ESP32 + Display      | 带可视化界面的代理    |
+| STM32 Nucleo | STM32 (ARM Cortex-M) | 工业外设              |
+| Arduino      | Arduino              | 基础传感器/执行器桥接 |
+| Uno Q Bridge | Arduino Uno          | 到代理的串口桥接      |
 
 ### 工具 + 自动化
 
@@ -324,7 +295,6 @@ React 19 + Vite 6 + Tailwind CSS 4 网页仪表板直接从 Gateway 提供：
 - CI/CD：beta（推送时自动）→ stable（手动触发）→ Docker、crates.io、Scoop、AUR、Homebrew、tweet。
 - 预构建二进制文件支持 Linux（x86_64、aarch64、armv7）、macOS（x86_64、aarch64）、Windows（x86_64）。
 
-
 ## 配置
 
 最小 `~/.zeroclaw/config.toml`：
@@ -339,18 +309,21 @@ api_key = "sk-ant-..."
 ### 频道配置
 
 **Telegram：**
+
 ```toml
 [channels.telegram]
 bot_token = "123456:ABC-DEF..."
 ```
 
 **Discord：**
+
 ```toml
 [channels.discord]
 token = "your-bot-token"
 ```
 
 **Slack：**
+
 ```toml
 [channels.slack]
 bot_token = "xoxb-..."
@@ -358,12 +331,14 @@ app_token = "xapp-..."
 ```
 
 **WhatsApp：**
+
 ```toml
 [channels.whatsapp]
 enabled = true
 ```
 
 **Matrix：**
+
 ```toml
 [channels.matrix]
 homeserver_url = "https://matrix.org"
@@ -372,6 +347,7 @@ password = "..."
 ```
 
 **Signal：**
+
 ```toml
 [channels.signal]
 phone_number = "+1234567890"
@@ -426,6 +402,7 @@ zeroclaw agent --provider anthropic -m "hello"
 工作区根目录：`~/.zeroclaw/workspace/`（可通过配置自定义）。
 
 注入的提示文件：
+
 - `IDENTITY.md` — 代理人格和角色
 - `USER.md` — 用户上下文和偏好
 - `MEMORY.md` — 长期事实和经验
@@ -515,25 +492,25 @@ zeroclaw completions zsh > ~/.zfunc/_zeroclaw
 
 1. **Visual Studio Build Tools**（提供 MSVC 链接器和 Windows SDK）：
 
-    ```powershell
-    winget install Microsoft.VisualStudio.2022.BuildTools
-    ```
+   ```powershell
+   winget install Microsoft.VisualStudio.2022.BuildTools
+   ```
 
-    在安装期间（或通过 Visual Studio 安装程序），选择 **"Desktop development with C++"** 工作负载。
+   在安装期间（或通过 Visual Studio 安装程序），选择 **"Desktop development with C++"** 工作负载。
 
 2. **Rust 工具链：**
 
-    ```powershell
-    winget install Rustlang.Rustup
-    ```
+   ```powershell
+   winget install Rustlang.Rustup
+   ```
 
-    安装后，打开新终端并运行 `rustup default stable` 确保 stable 工具链已激活。
+   安装后，打开新终端并运行 `rustup default stable` 确保 stable 工具链已激活。
 
 3. **验证**两者是否正常工作：
-    ```powershell
-    rustc --version
-    cargo --version
-    ```
+   ```powershell
+   rustc --version
+   cargo --version
+   ```
 
 #### 可选
 
@@ -547,23 +524,23 @@ zeroclaw completions zsh > ~/.zfunc/_zeroclaw
 #### 必需
 
 1. **构建工具：**
-    - **Linux (Debian/Ubuntu):** `sudo apt install build-essential pkg-config`
-    - **Linux (Fedora/RHEL):** `sudo dnf group install development-tools && sudo dnf install pkg-config`
-    - **macOS:** 安装 Xcode 命令行工具：`xcode-select --install`
+   - **Linux (Debian/Ubuntu):** `sudo apt install build-essential pkg-config`
+   - **Linux (Fedora/RHEL):** `sudo dnf group install development-tools && sudo dnf install pkg-config`
+   - **macOS:** 安装 Xcode 命令行工具：`xcode-select --install`
 
 2. **Rust 工具链：**
 
-    ```bash
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    ```
+   ```bash
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   ```
 
-    详情参见 [rustup.rs](https://rustup.rs)。
+   详情参见 [rustup.rs](https://rustup.rs)。
 
 3. **验证**两者是否正常工作：
-    ```bash
-    rustc --version
-    cargo --version
-    ```
+   ```bash
+   rustc --version
+   cargo --version
+   ```
 
 #### 一行安装
 
@@ -577,10 +554,10 @@ curl -LsSf https://raw.githubusercontent.com/zeroclaw-labs/zeroclaw/master/insta
 
 从源码构建比运行生成的二进制文件需要更多资源：
 
-| 资源 | 最低 | 推荐 |
-| ---- | ---- | ---- |
-| **RAM + swap** | 2 GB | 4 GB+ |
-| **可用磁盘** | 6 GB | 10 GB+ |
+| 资源           | 最低 | 推荐   |
+| -------------- | ---- | ------ |
+| **RAM + swap** | 2 GB | 4 GB+  |
+| **可用磁盘**   | 6 GB | 10 GB+ |
 
 如果你的主机低于最低要求，使用预构建二进制文件：
 
@@ -712,10 +689,10 @@ ZeroClaw 新手？寻找标记为 [`good first issue`](https://github.com/zerocl
 
 ZeroClaw 采用双重许可，以实现最大开放性和贡献者保护：
 
-| 许可证 | 使用场景 |
-|--------|----------|
-| [MIT](LICENSE-MIT) | 开源、研究、学术、个人使用 |
-| [Apache 2.0](LICENSE-APACHE) | 专利保护、机构、商业部署 |
+| 许可证                       | 使用场景                   |
+| ---------------------------- | -------------------------- |
+| [MIT](LICENSE-MIT)           | 开源、研究、学术、个人使用 |
+| [Apache 2.0](LICENSE-APACHE) | 专利保护、机构、商业部署   |
 
 你可以选择任一许可证。**贡献者自动授予两种许可证的权利** — 参见 [CLA.md](docs/contributing/cla.md) 了解完整的贡献者协议。
 
