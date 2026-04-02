@@ -28,13 +28,13 @@ brew upgrade zeroclaw
 zeroclaw --version
 ```
 
-### B) Clone + bootstrap install
+### B) Clone + build from source
 
 From your local repository checkout:
 
 ```bash
 git pull --ff-only
-./install.sh --prefer-prebuilt
+cargo build --release
 zeroclaw --version
 ```
 

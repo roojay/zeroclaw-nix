@@ -45,7 +45,6 @@
 
 - `docs/custom-providers.md`
 - `docs/zai-glm-setup.md`
-- `docs/langgraph-integration.md`
 - `docs/network-deployment.md`
 - `docs/matrix-e2ee-guide.md`
 - `docs/mattermost-setup.md`

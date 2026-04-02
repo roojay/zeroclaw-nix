@@ -2,15 +2,15 @@
 
 Largest source files in `src/`, ranked by severity. Each does multiple jobs in a single file, hurting readability, testability, and merge conflict frequency.
 
-| File | Lines | Problem |
-|---|---|---|
-| `config/schema.rs` | 7,647 | Every config struct for the entire system in one file |
-| `onboard/wizard.rs` | 7,200 | Entire onboarding flow in one function-like blob |
-| `channels/mod.rs` | 6,591 | Channel factory + shared logic + all wiring |
-| `agent/loop_.rs` | 5,599 | The entire agent orchestration loop |
-| `channels/telegram.rs` | 4,606 | One channel impl shouldn't be this big |
-| `providers/mod.rs` | 2,903 | Provider factory + shared conversion logic |
-| `gateway/mod.rs` | 2,777 | HTTP server setup + middleware + routing |
+| File                   | Lines | Problem                                               |
+| ---------------------- | ----- | ----------------------------------------------------- |
+| `config/schema.rs`     | 7,647 | Every config struct for the entire system in one file |
+| `onboard/wizard.rs`    | 7,200 | Entire onboarding flow in one function-like blob      |
+| `channels/mod.rs`      | 6,591 | Channel factory + shared logic + all wiring           |
+| `agent/loop_.rs`       | 5,599 | The entire agent orchestration loop                   |
+| `channels/telegram.rs` | 4,606 | One channel impl shouldn't be this big                |
+| `providers/mod.rs`     | 2,903 | Provider factory + shared conversion logic            |
+| `gateway/mod.rs`       | 2,777 | HTTP server setup + middleware + routing              |
 
 ## Additional Notes
 
@@ -98,10 +98,6 @@ The project claims size optimization as a goal (`opt-level = "z"`, `lto = "fat"`
 
 Two instances in `src/service/mod.rs` for `libc::getuid()` — no `// SAFETY:` comment. Could use the `nix` crate's safe wrapper instead.
 
-### Low: Python code quality
-
-The `python/` subtree has minimal type hints, no docstrings on key functions, and no parametrized tests. Inconsistent with the Rust side's rigor.
-
 ### Low: Minimal `rustfmt.toml`
 
 Only sets `edition = "2021"`. For a project this size, configuring `max_width`, `imports_granularity`, `group_imports` would enforce consistency as contributor count grows.
@@ -111,6 +107,7 @@ Only sets `edition = "2021"`. For a project this size, configuring `max_width`, 
 ~~Third-party actions pinned to mutable tags; release workflows granted overly broad write permissions; no composite gate job for branch protection; security tools compiled from source on every PR.~~
 
 **Fixed in** `cicd-best-practices` **branch:**
+
 - All third-party actions SHA-pinned (P1)
 - Release workflow permissions scoped per-job (P1)
 - Composite `Gate` job added to PR checks (P2)
@@ -141,6 +138,7 @@ Changes deferred from the project-cleanup pass. Each entry includes rationale an
 **Why:** Vietnamese translations currently exist in three places: `docs/i18n/vi/` (canonical per CLAUDE.md), `docs/vi/` (stale duplicate with 17 files diverged), and `docs/*.vi.md` (5 scattered suffix files). Other locales (zh-CN, ja, ru, fr) have SUMMARY + README files scattered in `docs/` root.
 
 **Plan:**
+
 - Keep `docs/i18n/vi/` as canonical; delete `docs/vi/` (stale duplicate)
 - Move `docs/*.vi.md` files into `docs/i18n/vi/` at matching paths
 - Move `docs/SUMMARY.*.md` and `docs/README.*.md` into `docs/i18n/<locale>/`
@@ -187,6 +185,7 @@ Issues identified during quality review of the test restructuring work.
 **2. Dead infrastructure: `TestChannel`, `TraceLlmProvider`, trace fixtures, `verify_expects()`**
 
 These were built as scaffolding but have no consumers:
+
 - `tests/support/mock_channel.rs` (`TestChannel`) — planned for channel-driven system tests, but the agent has no public channel-driven loop API, so system tests use `agent.turn()` directly.
 - `tests/support/mock_provider.rs` (`TraceLlmProvider`) — replays JSON fixture traces, but no test loads or runs a fixture.
 - `tests/fixtures/traces/*.json` (3 files) — never loaded by any test.
@@ -200,7 +199,8 @@ Either write tests that exercise this infrastructure or remove it to avoid dead 
 
 **4. Security component tests are config-only — no behavioral coverage**
 
-The 10 security tests validate config defaults and TOML serialization only (`AutonomyConfig::default()`, `SecretsConfig`, round-trips). They don't test security *behavior* (policy enforcement, credential scrubbing, action rate limiting) because `src/security/` is `pub(crate)`. The `security_config_debug_does_not_leak_api_key` test is a no-op — it checks for a leak but has no assertion on failure (just a comment). To get real behavioral coverage, either:
+The 10 security tests validate config defaults and TOML serialization only (`AutonomyConfig::default()`, `SecretsConfig`, round-trips). They don't test security _behavior_ (policy enforcement, credential scrubbing, action rate limiting) because `src/security/` is `pub(crate)`. The `security_config_debug_does_not_leak_api_key` test is a no-op — it checks for a leak but has no assertion on failure (just a comment). To get real behavioral coverage, either:
+
 - Make targeted security functions `pub` for testing (e.g. `scrub_credentials`, `SecurityPolicy::evaluate`)
 - Add `#[cfg(test)] pub` escape hatches in `src/security/`
 - Write in-crate unit tests in `src/security/tests.rs` instead

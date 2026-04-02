@@ -8,7 +8,7 @@ For broader documentation navigation, use [`docs/README.md`](../README.md).
 - **Purpose:** define a deterministic reviewer operating model that keeps review quality high under heavy PR volume.
 - **Audience:** maintainers, reviewers, and agent-assisted reviewers.
 - **Scope:** intake triage, risk-to-depth routing, deep-review checks, automation overrides, and handoff protocol.
-- **Non-goals:** replacing PR policy authority in `CONTRIBUTING.md` or workflow authority in CI files.
+- **Non-goals:** replacing PR policy authority in `AGENTS.md` or workflow authority in CI files.
 
 ---
 
@@ -57,11 +57,11 @@ Go to:
 
 ## 2. Review Depth Decision Matrix
 
-| Risk label | Typical touched paths | Minimum review depth | Required evidence |
-|---|---|---|---|
-| `risk: low` | docs/tests/chore, isolated non-runtime changes | 1 reviewer + CI gate | coherent local validation + no behavior ambiguity |
-| `risk: medium` | `src/providers/**`, `src/channels/**`, `src/memory/**`, `src/config/**` | 1 subsystem-aware reviewer + behavior verification | focused scenario proof + explicit side effects |
-| `risk: high` | `src/security/**`, `src/runtime/**`, `src/gateway/**`, `src/tools/**`, `.github/workflows/**` | fast triage + deep review + rollback readiness | security/failure-mode checks + rollback clarity |
+| Risk label     | Typical touched paths                                                                         | Minimum review depth                               | Required evidence                                 |
+| -------------- | --------------------------------------------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------- |
+| `risk: low`    | docs/tests/chore, isolated non-runtime changes                                                | 1 reviewer + CI gate                               | coherent local validation + no behavior ambiguity |
+| `risk: medium` | `src/providers/**`, `src/channels/**`, `src/memory/**`, `src/config/**`                       | 1 subsystem-aware reviewer + behavior verification | focused scenario proof + explicit side effects    |
+| `risk: high`   | `src/security/**`, `src/runtime/**`, `src/gateway/**`, `src/tools/**`, `.github/workflows/**` | fast triage + deep review + rollback readiness     | security/failure-mode checks + rollback clarity   |
 
 When uncertain, treat as `risk: high`.
 
@@ -97,7 +97,7 @@ If any intake requirement fails, leave one actionable checklist comment instead 
 - Compatibility/migration impacts are clear.
 - No personal/sensitive data leakage in diff artifacts; examples/tests remain neutral and project-scoped.
 - If identity-like wording exists, it uses ZeroClaw/project-native roles (not personal or real-world identities).
-- Naming and architecture boundaries follow project contracts (`AGENTS.md`, `CONTRIBUTING.md`).
+- Naming and architecture boundaries follow project contracts (`AGENTS.md`).
 
 ### 3.3 Deep review checklist (high risk)
 

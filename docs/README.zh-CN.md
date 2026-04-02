@@ -17,7 +17,6 @@
 | 快速查看配置默认值与关键项     | [config-reference.md](i18n/zh-CN/reference/api/config-reference.zh-CN.md)                                   |
 | 接入自定义 Provider / endpoint | [custom-providers.md](i18n/zh-CN/contributing/custom-providers.zh-CN.md)                                    |
 | 配置 Z.AI / GLM Provider       | [zai-glm-setup.md](i18n/zh-CN/setup-guides/zai-glm-setup.zh-CN.md)                                          |
-| 使用 LangGraph 工具调用集成    | [langgraph-integration.md](i18n/zh-CN/contributing/langgraph-integration.zh-CN.md)                          |
 | 进行日常运维（runbook）        | [operations-runbook.md](i18n/zh-CN/ops/operations-runbook.zh-CN.md)                                         |
 | 快速排查安装/运行/通道问题     | [troubleshooting.md](i18n/zh-CN/ops/troubleshooting.zh-CN.md)                                               |
 | Matrix 加密房间配置与诊断      | [matrix-e2ee-guide.md](i18n/zh-CN/security/matrix-e2ee-guide.zh-CN.md)                                      |
@@ -56,13 +55,11 @@
 - [config-reference.md](i18n/zh-CN/reference/api/config-reference.zh-CN.md) — 高优先级配置项与安全默认值
 - [custom-providers.md](i18n/zh-CN/contributing/custom-providers.zh-CN.md) — 自定义 Provider/基础 URL 集成模板
 - [zai-glm-setup.md](i18n/zh-CN/setup-guides/zai-glm-setup.zh-CN.md) — Z.AI/GLM 配置与端点矩阵
-- [langgraph-integration.md](i18n/zh-CN/contributing/langgraph-integration.zh-CN.md) — 模型/工具调用边缘场景的降级集成方案
 - [operations-runbook.md](i18n/zh-CN/ops/operations-runbook.zh-CN.md) — 日常运行时运维与回滚流程
 - [troubleshooting.md](i18n/zh-CN/ops/troubleshooting.zh-CN.md) — 常见故障特征与恢复步骤
 
 ### 贡献者 / 维护者
 
-- [../CONTRIBUTING.md](../CONTRIBUTING.md)
 - [pr-workflow.md](i18n/zh-CN/contributing/pr-workflow.zh-CN.md)
 - [reviewer-playbook.md](i18n/zh-CN/contributing/reviewer-playbook.zh-CN.md)
 - [ci-map.md](i18n/zh-CN/contributing/ci-map.zh-CN.md)

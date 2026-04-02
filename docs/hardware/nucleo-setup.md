@@ -8,10 +8,10 @@ Run ZeroClaw on your Mac or Linux host. Connect a Nucleo-F401RE via USB. Control
 
 ZeroClaw can read chip info from the Nucleo over USB **without flashing any firmware**. Message your Telegram bot:
 
-- *"What board info do I have?"*
-- *"Board info"*
-- *"What hardware is connected?"*
-- *"Chip info"*
+- _"What board info do I have?"_
+- _"Board info"_
+- _"What hardware is connected?"_
+- _"Chip info"_
 
 The agent uses the `hardware_board_info` tool to return chip name, architecture, and memory map. With the `probe` feature, it reads live data via USB/SWD; otherwise it returns static datasheet info.
 
@@ -39,11 +39,10 @@ zeroclaw hardware discover
 
 ZeroClaw includes everything for Nucleo-F401RE:
 
-| Component | Location | Purpose |
-|-----------|----------|---------|
-| Firmware | `firmware/nucleo/` | Embassy Rust — USART2 (115200), gpio_read, gpio_write |
-| Serial peripheral | `src/peripherals/serial.rs` | JSON-over-serial protocol (same as Arduino/ESP32) |
-| Flash command | `zeroclaw peripheral flash-nucleo` | Builds firmware, flashes via probe-rs |
+| Component         | Location                           | Purpose                                           |
+| ----------------- | ---------------------------------- | ------------------------------------------------- |
+| Serial peripheral | `src/peripherals/serial.rs`        | JSON-over-serial protocol (same as Arduino/ESP32) |
+| Flash command     | `zeroclaw peripheral flash-nucleo` | Builds firmware, flashes via probe-rs             |
 
 Protocol: newline-delimited JSON. Request: `{"id":"1","cmd":"gpio_write","args":{"pin":13,"value":1}}`. Response: `{"id":"1","ok":true,"result":"done"}`.
 
@@ -72,13 +71,11 @@ From the zeroclaw repo root:
 zeroclaw peripheral flash-nucleo
 ```
 
-This builds `firmware/nucleo` and runs `probe-rs run --chip STM32F401RETx`. The firmware runs immediately after flashing.
+This runs `probe-rs run --chip STM32F401RETx`. The firmware runs immediately after flashing.
 
 ### 1.3 Manual Flash (Alternative)
 
 ```bash
-cd firmware/nucleo
-cargo build --release --target thumbv7em-none-eabihf
 probe-rs run --chip STM32F401RETx target/thumbv7em-none-eabihf/release/nucleo
 ```
 
@@ -128,13 +125,13 @@ Pin 13 = PA5 = User LED (LD2) on Nucleo-F401RE.
 
 ## Summary: Commands
 
-| Step | Command |
-|------|---------|
-| 1 | Connect Nucleo via USB |
-| 2 | `cargo install probe-rs-tools --locked` |
-| 3 | `zeroclaw peripheral flash-nucleo` |
-| 4 | Add Nucleo to config.toml (path = your serial port) |
-| 5 | `zeroclaw daemon` or `zeroclaw agent -m "Turn on LED"` |
+| Step | Command                                                |
+| ---- | ------------------------------------------------------ |
+| 1    | Connect Nucleo via USB                                 |
+| 2    | `cargo install probe-rs-tools --locked`                |
+| 3    | `zeroclaw peripheral flash-nucleo`                     |
+| 4    | Add Nucleo to config.toml (path = your serial port)    |
+| 5    | `zeroclaw daemon` or `zeroclaw agent -m "Turn on LED"` |
 
 ---
 

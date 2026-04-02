@@ -15,7 +15,7 @@
 修复：
 
 ```bash
-./install.sh --install-rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
 或从 <https://rustup.rs/> 安装。
@@ -28,9 +28,7 @@
 
 修复：
 
-```bash
-./install.sh --install-system-deps
-```
+通过包管理器安装构建依赖（例如 Debian/Ubuntu 上 `apt install build-essential pkg-config libssl-dev`）。
 
 ### 低内存/低磁盘主机上构建失败
 
@@ -45,17 +43,7 @@
 - 完整源码构建可能需要 **2 GB RAM + 交换空间** 和 **6+ GB 可用磁盘**。
 - 在小磁盘上启用交换空间可以避免 RAM OOM，但仍可能因磁盘耗尽而失败。
 
-资源受限机器的首选路径：
-
-```bash
-./install.sh --prefer-prebuilt
-```
-
-仅二进制模式（无源码回退）：
-
-```bash
-./install.sh --prebuilt-only
-```
+资源受限机器的首选路径：使用 Nix 构建或 Docker。
 
 如果你必须在资源受限主机上从源码编译：
 
@@ -215,10 +203,10 @@ Linux 日志：
 journalctl --user -u zeroclaw.service -f
 ```
 
-## 安装程序 URL
+## 从源码构建
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/zeroclaw-labs/zeroclaw/master/install.sh | bash
+cargo build --release
 ```
 
 ## 仍然卡住？

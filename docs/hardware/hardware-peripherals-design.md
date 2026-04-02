@@ -5,6 +5,7 @@ ZeroClaw enables microcontrollers (MCUs) and Single Board Computers (SBCs) to **
 ## 1. Vision
 
 **Goal:** ZeroClaw acts as a hardware-aware AI agent that:
+
 - Receives natural language triggers (e.g. "Move X arm", "Turn on LED") via channels (WhatsApp, Telegram)
 - Fetches accurate hardware documentation (datasheets, register maps)
 - Synthesizes Rust code/logic using an LLM (Gemini, local open-source models)
@@ -40,7 +41,8 @@ ZeroClaw runs **directly on the device**. The board spins up a gRPC/nanoRPC serv
 ```
 
 **Workflow:**
-1. User sends WhatsApp: *"Turn on LED on pin 13"*
+
+1. User sends WhatsApp: _"Turn on LED on pin 13"_
 2. ZeroClaw fetches board-specific docs (e.g. ESP32 GPIO mapping)
 3. LLM synthesizes Rust code
 4. Code runs in a sandbox (Wasm or dynamic linking)
@@ -67,31 +69,34 @@ ZeroClaw runs on the **host** and maintains a hardware-aware link to the target.
 ```
 
 **Workflow:**
-1. User sends Telegram: *"What are the readable memory addresses on this USB device?"*
+
+1. User sends Telegram: _"What are the readable memory addresses on this USB device?"_
 2. ZeroClaw identifies connected hardware (VID/PID, architecture)
 3. Performs memory mapping; suggests available address spaces
 4. Returns result to user
 
 **Or:**
-1. User: *"Flash this firmware to the Nucleo"*
+
+1. User: _"Flash this firmware to the Nucleo"_
 2. ZeroClaw writes/flashes via OpenOCD or probe-rs
 3. Confirms success
 
 **Or:**
-1. ZeroClaw auto-discovers: *"STM32 Nucleo on /dev/ttyACM0, ARM Cortex-M4"*
-2. Suggests: *"I can read/write GPIO, ADC, flash. What would you like to do?"*
+
+1. ZeroClaw auto-discovers: _"STM32 Nucleo on /dev/ttyACM0, ARM Cortex-M4"_
+2. Suggests: _"I can read/write GPIO, ADC, flash. What would you like to do?"_
 
 ---
 
 ### Mode Comparison
 
-| Aspect           | Edge-Native                    | Host-Mediated                    |
-|------------------|--------------------------------|----------------------------------|
-| ZeroClaw runs on | Device (ESP32, RPi)           | Host (Mac, Linux)                |
-| Hardware link    | Local (GPIO, I2C, SPI)        | USB, J-Link, Aardvark            |
-| LLM              | On-device or cloud (Gemini)   | Host (cloud or local)            |
-| Use case         | Production, standalone         | Dev, debug, introspection       |
-| Channels         | WhatsApp, etc. (via WiFi)      | Telegram, CLI, etc.              |
+| Aspect           | Edge-Native                 | Host-Mediated             |
+| ---------------- | --------------------------- | ------------------------- |
+| ZeroClaw runs on | Device (ESP32, RPi)         | Host (Mac, Linux)         |
+| Hardware link    | Local (GPIO, I2C, SPI)      | USB, J-Link, Aardvark     |
+| LLM              | On-device or cloud (Gemini) | Host (cloud or local)     |
+| Use case         | Production, standalone      | Dev, debug, introspection |
+| Channels         | WhatsApp, etc. (via WiFi)   | Telegram, CLI, etc.       |
 
 ## 3. Legacy / Simpler Modes (Pre-LLM-on-Edge)
 
@@ -107,13 +112,13 @@ ZeroClaw on Pi; GPIO via rppal or sysfs. No separate firmware.
 
 ## 4. Technical Requirements
 
-| Requirement | Description |
-|-------------|-------------|
-| **Language** | Pure Rust. `no_std` where applicable for embedded targets (STM32, ESP32). |
-| **Communication** | Lightweight gRPC or nanoRPC stack for low-latency command processing. |
-| **Dynamic execution** | Safely run LLM-generated logic on-the-fly: Wasm runtime for isolation, or dynamic linking where supported. |
+| Requirement                 | Description                                                                                                            |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Language**                | Pure Rust. `no_std` where applicable for embedded targets (STM32, ESP32).                                              |
+| **Communication**           | Lightweight gRPC or nanoRPC stack for low-latency command processing.                                                  |
+| **Dynamic execution**       | Safely run LLM-generated logic on-the-fly: Wasm runtime for isolation, or dynamic linking where supported.             |
 | **Documentation retrieval** | RAG (Retrieval-Augmented Generation) pipeline to feed datasheet snippets, register maps, and pinouts into LLM context. |
-| **Hardware discovery** | VID/PID-based identification for USB devices; architecture detection (ARM Cortex-M, RISC-V, etc.). |
+| **Hardware discovery**      | VID/PID-based identification for USB devices; architecture detection (ARM Cortex-M, RISC-V, etc.).                     |
 
 ### RAG Pipeline (Datasheet Retrieval)
 
@@ -124,12 +129,12 @@ ZeroClaw on Pi; GPIO via rppal or sysfs. No separate firmware.
 
 ### Dynamic Execution Options
 
-| Option | Pros | Cons |
-|-------|------|------|
-| **Wasm** | Sandboxed, portable, no FFI | Overhead; limited HW access from Wasm |
-| **Dynamic linking** | Native speed, full HW access | Platform-specific; security concerns |
-| **Interpreted DSL** | Safe, auditable | Slower; limited expressiveness |
-| **Pre-compiled templates** | Fast, secure | Less flexible; requires template library |
+| Option                     | Pros                         | Cons                                     |
+| -------------------------- | ---------------------------- | ---------------------------------------- |
+| **Wasm**                   | Sandboxed, portable, no FFI  | Overhead; limited HW access from Wasm    |
+| **Dynamic linking**        | Native speed, full HW access | Platform-specific; security concerns     |
+| **Interpreted DSL**        | Safe, auditable              | Slower; limited expressiveness           |
+| **Pre-compiled templates** | Fast, secure                 | Less flexible; requires template library |
 
 **Recommendation:** Start with pre-compiled templates + parameterization; evolve to Wasm for user-defined logic once stable.
 
@@ -202,11 +207,11 @@ pub trait Peripheral: Send + Sync {
 
 ### Board Support
 
-| Board              | Transport | Firmware / Driver      | Tools                    |
-|--------------------|-----------|------------------------|--------------------------|
-| nucleo-f401re      | serial    | Zephyr / Embassy       | gpio_read, gpio_write, adc_read |
-| rpi-gpio           | native    | rppal or sysfs         | gpio_read, gpio_write    |
-| esp32              | serial/ws | ESP-IDF / Embassy      | gpio, wifi, mqtt         |
+| Board         | Transport | Firmware / Driver | Tools                           |
+| ------------- | --------- | ----------------- | ------------------------------- |
+| nucleo-f401re | serial    | Zephyr / Embassy  | gpio_read, gpio_write, adc_read |
+| rpi-gpio      | native    | rppal or sysfs    | gpio_read, gpio_write           |
+| esp32         | serial/ws | ESP-IDF / Embassy | gpio, wifi, mqtt                |
 
 ## 7. Communication Protocols
 
@@ -223,13 +228,15 @@ For low-latency, typed RPC between ZeroClaw and peripherals:
 Simple JSON over serial for boards without gRPC support:
 
 **Request (host → peripheral):**
+
 ```json
-{"id":"1","cmd":"gpio_write","args":{"pin":13,"value":1}}
+{ "id": "1", "cmd": "gpio_write", "args": { "pin": 13, "value": 1 } }
 ```
 
 **Response (peripheral → host):**
+
 ```json
-{"id":"1","ok":true,"result":"done"}
+{ "id": "1", "ok": true, "result": "done" }
 ```
 
 ## 8. Firmware (Separate Repo or Crate)
@@ -277,12 +284,12 @@ Simple JSON over serial for boards without gRPC support:
 ### Phase 6: Edge-Native — ESP32
 
 - [x] Host-mediated ESP32 (serial transport) — same JSON protocol as STM32
-- [x] `esp32` firmware crate (`firmware/esp32`) — GPIO over UART
+- [x] `esp32` firmware crate — GPIO over UART
 - [x] ESP32 in hardware registry (CH340 VID/PID)
-- [ ] ZeroClaw *on* ESP32 (WiFi + LLM, edge-native) — future
+- [ ] ZeroClaw _on_ ESP32 (WiFi + LLM, edge-native) — future
 - [ ] Wasm or template-based execution for LLM-generated logic
 
-**Usage:** Flash `firmware/esp32` to ESP32, add `board = "esp32"`, `transport = "serial"`, `path = "/dev/ttyUSB0"` to config.
+**Usage:** Flash ESP32 firmware, add `board = "esp32"`, `transport = "serial"`, `path = "/dev/ttyUSB0"` to config.
 
 ### Phase 7: Dynamic Execution (LLM-Generated Code)
 
@@ -298,7 +305,7 @@ Simple JSON over serial for boards without gRPC support:
 
 ## 11. Non-Goals (For Now)
 
-- Running full ZeroClaw *on* bare STM32 (no WiFi, limited RAM) — use Host-Mediated instead
+- Running full ZeroClaw _on_ bare STM32 (no WiFi, limited RAM) — use Host-Mediated instead
 - Real-time guarantees — peripherals are best-effort
 - Arbitrary native code execution from LLM — prefer Wasm or templates
 
@@ -319,6 +326,6 @@ Simple JSON over serial for boards without gRPC support:
 
 ## 14. Raw Prompt Summary
 
-> *"Boards like ESP, Raspberry Pi, or boards with WiFi can connect to an LLM (Gemini or open-source). ZeroClaw runs on the device, creates its own gRPC, spins it up, and communicates with peripherals. User asks via WhatsApp: 'move X arm' or 'turn on LED'. ZeroClaw gets accurate documentation, writes code, executes it, stores it optimally, runs it, and turns on the LED — all on the development board.*
+> _"Boards like ESP, Raspberry Pi, or boards with WiFi can connect to an LLM (Gemini or open-source). ZeroClaw runs on the device, creates its own gRPC, spins it up, and communicates with peripherals. User asks via WhatsApp: 'move X arm' or 'turn on LED'. ZeroClaw gets accurate documentation, writes code, executes it, stores it optimally, runs it, and turns on the LED — all on the development board._
 >
-> *For STM Nucleo connected via USB/J-Link/Aardvark to my Mac: ZeroClaw from my Mac accesses the hardware, installs or writes what it wants on the device, and returns the result. Example: 'Hey ZeroClaw, what are the available/readable addresses on this USB device?' It can figure out what's connected where and suggest."*
+> _For STM Nucleo connected via USB/J-Link/Aardvark to my Mac: ZeroClaw from my Mac accesses the hardware, installs or writes what it wants on the device, and returns the result. Example: 'Hey ZeroClaw, what are the available/readable addresses on this USB device?' It can figure out what's connected where and suggest."_

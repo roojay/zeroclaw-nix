@@ -8,12 +8,11 @@
 
 ZeroClaw 包含 Arduino Uno Q 所需的一切。**克隆仓库并按照本指南操作 —— 无需补丁或自定义代码。**
 
-| 组件 | 位置 | 目的 |
-|-----------|----------|---------|
-| 桥接应用 | `firmware/uno-q-bridge/` | MCU 草图 + Python Socket 服务器（端口 9999）用于 GPIO |
-| 桥接工具 | `src/peripherals/uno_q_bridge.rs` | 通过 TCP 与桥接通信的 `gpio_read` / `gpio_write` 工具 |
-| 设置命令 | `src/peripherals/uno_q_setup.rs` | `zeroclaw peripheral setup-uno-q` 通过 scp + arduino-app-cli 部署桥接 |
-| 配置 schema | `board = "arduino-uno-q"`, `transport = "bridge"` | 在 `config.toml` 中支持 |
+| 组件        | 位置                                              | 目的                                                                  |
+| ----------- | ------------------------------------------------- | --------------------------------------------------------------------- |
+| 桥接工具    | `src/peripherals/uno_q_bridge.rs`                 | 通过 TCP 与桥接通信的 `gpio_read` / `gpio_write` 工具                 |
+| 设置命令    | `src/peripherals/uno_q_setup.rs`                  | `zeroclaw peripheral setup-uno-q` 通过 scp + arduino-app-cli 部署桥接 |
+| 配置 schema | `board = "arduino-uno-q"`, `transport = "bridge"` | 在 `config.toml` 中支持                                               |
 
 使用 `--features hardware` 构建以包含 Uno Q 支持。
 
@@ -159,11 +158,13 @@ ZeroClaw 包含桥接应用和设置命令。
 ### 5.1 部署桥接应用
 
 **从你的 Mac**（在 zeroclaw 仓库中）：
+
 ```bash
 zeroclaw peripheral setup-uno-q --host 192.168.0.48
 ```
 
 **从 Uno Q**（已 SSH 连接）：
+
 ```bash
 zeroclaw peripheral setup-uno-q
 ```
@@ -187,24 +188,24 @@ transport = "bridge"
 zeroclaw daemon --host 127.0.0.1 --port 42617
 ```
 
-现在当你向 Telegram 机器人发送 *"Turn on the LED"* 或 *"Set pin 13 high"* 时，ZeroClaw 会通过桥接使用 `gpio_write`。
+现在当你向 Telegram 机器人发送 _"Turn on the LED"_ 或 _"Set pin 13 high"_ 时，ZeroClaw 会通过桥接使用 `gpio_write`。
 
 ---
 
 ## 命令摘要（从头到尾）
 
-| 步骤 | 命令 |
-|------|---------|
-| 1 | 在 App Lab 中配置 Uno Q（Wi-Fi、SSH） |
-| 2 | `ssh arduino@<IP>` |
-| 3 | `curl -sSf https://sh.rustup.rs \| sh -s -- -y && source ~/.cargo/env` |
-| 4 | `sudo apt-get install -y pkg-config libssl-dev` |
-| 5 | `git clone https://github.com/zeroclaw-labs/zeroclaw.git && cd zeroclaw` |
-| 6 | `cargo build --release --features hardware` |
-| 7 | `zeroclaw onboard --api-key KEY --provider openrouter` |
-| 8 | 编辑 `~/.zeroclaw/config.toml`（添加 Telegram bot_token） |
-| 9 | `zeroclaw daemon --host 127.0.0.1 --port 42617` |
-| 10 | 向 Telegram 机器人发送消息 —— 它会响应 |
+| 步骤 | 命令                                                                     |
+| ---- | ------------------------------------------------------------------------ |
+| 1    | 在 App Lab 中配置 Uno Q（Wi-Fi、SSH）                                    |
+| 2    | `ssh arduino@<IP>`                                                       |
+| 3    | `curl -sSf https://sh.rustup.rs \| sh -s -- -y && source ~/.cargo/env`   |
+| 4    | `sudo apt-get install -y pkg-config libssl-dev`                          |
+| 5    | `git clone https://github.com/zeroclaw-labs/zeroclaw.git && cd zeroclaw` |
+| 6    | `cargo build --release --features hardware`                              |
+| 7    | `zeroclaw onboard --api-key KEY --provider openrouter`                   |
+| 8    | 编辑 `~/.zeroclaw/config.toml`（添加 Telegram bot_token）                |
+| 9    | `zeroclaw daemon --host 127.0.0.1 --port 42617`                          |
+| 10   | 向 Telegram 机器人发送消息 —— 它会响应                                   |
 
 ---
 

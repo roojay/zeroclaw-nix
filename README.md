@@ -80,10 +80,10 @@ nix build github:kcalvelli/zeroclaw-nix#zeroclaw-desktop   # desktop app (Tauri)
 
 ## Branch structure
 
-| Branch | Purpose |
-|--------|---------|
-| `main` | Default branch. v0.6.5 tag + nix packaging + feature patches. Point your flake here. |
-| `upstream/master` | Read-only mirror of zeroclaw-labs/zeroclaw. Zero fork-specific commits. |
+| Branch            | Purpose                                                                              |
+| ----------------- | ------------------------------------------------------------------------------------ |
+| `main`            | Default branch. v0.6.5 tag + nix packaging + feature patches. Point your flake here. |
+| `upstream/master` | Read-only mirror of zeroclaw-labs/zeroclaw. Zero fork-specific commits.              |
 
 To see exactly what the fork adds: `git log upstream/master..main --oneline`
 
@@ -91,23 +91,23 @@ To see exactly what the fork adds: `git log upstream/master..main --oneline`
 
 These are applied as commits on `main` (not `.patch` files):
 
-| Commit | Description |
-|--------|-------------|
-| `feat: wire XMPP channel` | Full XMPP channel implementation (xmpp.rs + registry wiring) |
-| `feat: OpenAI proxy` | v1/chat/completions endpoint + v1/models (openai_proxy.rs) |
+| Commit                               | Description                                                             |
+| ------------------------------------ | ----------------------------------------------------------------------- |
+| `feat: wire XMPP channel`            | Full XMPP channel implementation (xmpp.rs + registry wiring)            |
+| `feat: OpenAI proxy`                 | v1/chat/completions endpoint + v1/models (openai_proxy.rs)              |
 | `feat: full agent loop for webhooks` | Use tool-enabled agent loop instead of simple chat for webhook requests |
-| `fix: email reply loop` | Skip emails from own address |
-| `feat: email subject threading` | Preserve subject line in reply threading |
-| `feat: email sent folder` | Save sent emails to IMAP Sent folder |
-| `fix: skip noreply/bounce` | Ignore noreply and bounce addresses |
-| `fix: Claude Code permissions` | Skip permission checks in Claude Code CLI provider |
-| `feat: SOP provider override` | Allow per-SOP provider/model selection |
-| `feat: gateway URL env var` | Runtime ZEROCLAW_GATEWAY_URL for desktop app |
-| `feat: broadened CSP` | Tauri CSP allows remote gateway connections |
+| `fix: email reply loop`              | Skip emails from own address                                            |
+| `feat: email subject threading`      | Preserve subject line in reply threading                                |
+| `feat: email sent folder`            | Save sent emails to IMAP Sent folder                                    |
+| `fix: skip noreply/bounce`           | Ignore noreply and bounce addresses                                     |
+| `fix: Claude Code permissions`       | Skip permission checks in Claude Code CLI provider                      |
+| `feat: SOP provider override`        | Allow per-SOP provider/model selection                                  |
+| `feat: gateway URL env var`          | Runtime ZEROCLAW_GATEWAY_URL for desktop app                            |
+| `feat: broadened CSP`                | Tauri CSP allows remote gateway connections                             |
 
 ## Upstream sync
 
-See [SYNC.md](SYNC.md) for the step-by-step workflow to merge new upstream releases.
+This fork preserves the full upstream git history. To merge new upstream releases, add the upstream remote and cherry-pick or merge as needed.
 
 ## License
 

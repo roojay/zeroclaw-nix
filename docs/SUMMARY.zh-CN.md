@@ -22,7 +22,6 @@
 
 - [setup-guides/README.md](i18n/zh-CN/setup-guides/README.zh-CN.md)
 - [macos-update-uninstall.md](i18n/zh-CN/setup-guides/macos-update-uninstall.zh-CN.md)
-- [one-click-bootstrap.md](i18n/zh-CN/setup-guides/one-click-bootstrap.zh-CN.md)
 - [mattermost-setup.md](i18n/zh-CN/setup-guides/mattermost-setup.zh-CN.md)
 - [nextcloud-talk-setup.md](i18n/zh-CN/setup-guides/nextcloud-talk-setup.zh-CN.md)
 - [zai-glm-setup.md](i18n/zh-CN/setup-guides/zai-glm-setup.zh-CN.md)
@@ -35,7 +34,6 @@
 - [channels-reference.md](i18n/zh-CN/reference/api/channels-reference.zh-CN.md)
 - [config-reference.md](i18n/zh-CN/reference/api/config-reference.zh-CN.md)
 - [custom-providers.md](i18n/zh-CN/contributing/custom-providers.zh-CN.md)
-- [langgraph-integration.md](i18n/zh-CN/contributing/langgraph-integration.zh-CN.md)
 
 ### 3) SOP（标准操作流程）
 
@@ -80,7 +78,6 @@
 ### 7) 贡献与 CI
 
 - [contributing/README.md](i18n/zh-CN/contributing/README.zh-CN.md)
-- [../CONTRIBUTING.md](../CONTRIBUTING.md)
 - [pr-workflow.md](i18n/zh-CN/contributing/pr-workflow.zh-CN.md)
 - [reviewer-playbook.md](i18n/zh-CN/contributing/reviewer-playbook.zh-CN.md)
 - [ci-map.md](i18n/zh-CN/contributing/ci-map.zh-CN.md)

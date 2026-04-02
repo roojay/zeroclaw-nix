@@ -17,18 +17,17 @@ For first-time installation, start from [one-click-bootstrap.md](../setup-guides
 
 ## Runtime Modes
 
-| Mode | Command | When to use |
-|---|---|---|
-| Foreground runtime | `zeroclaw daemon` | local debugging, short-lived sessions |
-| Foreground gateway only | `zeroclaw gateway` | webhook endpoint testing |
-| User service | `zeroclaw service install && zeroclaw service start` | persistent operator-managed runtime |
-| Docker / Podman | `docker compose up -d` | containerized deployment |
+| Mode                    | Command                                              | When to use                           |
+| ----------------------- | ---------------------------------------------------- | ------------------------------------- |
+| Foreground runtime      | `zeroclaw daemon`                                    | local debugging, short-lived sessions |
+| Foreground gateway only | `zeroclaw gateway`                                   | webhook endpoint testing              |
+| User service            | `zeroclaw service install && zeroclaw service start` | persistent operator-managed runtime   |
+| Docker / Podman         | `docker compose up -d`                               | containerized deployment              |
 
 ## Docker / Podman Runtime
 
-If you installed via `./install.sh --docker`, the container exits after onboarding. To run
-ZeroClaw as a long-lived container, use the repository `docker-compose.yml` or start a
-container manually against the persisted data directory.
+To run ZeroClaw as a long-lived container, start a
+container manually or use Docker Compose.
 
 ### Recommended: docker-compose
 
@@ -74,12 +73,9 @@ docker exec zeroclaw zeroclaw status
 
 For Podman, add `--userns keep-id --user "$(id -u):$(id -g)"` and append `:Z` to volume mounts.
 
-### Key detail: do not re-run install.sh to restart
+### Key detail: use Docker commands to restart
 
-Re-running `install.sh --docker` rebuilds the image and re-runs onboarding. To simply
-restart, use `docker start`, `docker compose up -d`, or `podman start`.
-
-For full setup instructions, see [one-click-bootstrap.md](../setup-guides/one-click-bootstrap.md#stopping-and-restarting-a-dockerpodman-container).
+To restart, use `docker start`, `docker compose up -d`, or `podman start`.
 
 ## Baseline Operator Checklist
 
@@ -112,12 +108,12 @@ zeroclaw service status
 
 ## Health and State Signals
 
-| Signal | Command / File | Expected |
-|---|---|---|
-| Config validity | `zeroclaw doctor` | no critical errors |
-| Channel connectivity | `zeroclaw channel doctor` | configured channels healthy |
-| Runtime summary | `zeroclaw status` | expected provider/model/channels |
-| Daemon heartbeat/state | `~/.zeroclaw/daemon_state.json` | file updates periodically |
+| Signal                 | Command / File                  | Expected                         |
+| ---------------------- | ------------------------------- | -------------------------------- |
+| Config validity        | `zeroclaw doctor`               | no critical errors               |
+| Channel connectivity   | `zeroclaw channel doctor`       | configured channels healthy      |
+| Runtime summary        | `zeroclaw status`               | expected provider/model/channels |
+| Daemon heartbeat/state | `~/.zeroclaw/daemon_state.json` | file updates periodically        |
 
 ## Logs and Diagnostics
 

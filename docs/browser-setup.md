@@ -6,11 +6,11 @@ This guide covers setting up browser automation capabilities in ZeroClaw, includ
 
 ZeroClaw supports multiple browser access methods:
 
-| Method | Use Case | Requirements |
-|--------|----------|--------------|
-| **agent-browser CLI** | Headless automation, AI agents | npm, Chrome |
-| **VNC + noVNC** | GUI access, debugging | Xvfb, x11vnc, noVNC |
-| **Chrome Remote Desktop** | Remote GUI via Google | XFCE, Google account |
+| Method                    | Use Case                       | Requirements         |
+| ------------------------- | ------------------------------ | -------------------- |
+| **agent-browser CLI**     | Headless automation, AI agents | npm, Chrome          |
+| **VNC + noVNC**           | GUI access, debugging          | Xvfb, x11vnc, noVNC  |
+| **Chrome Remote Desktop** | Remote GUI via Google          | XFCE, Google account |
 
 ## Quick Start: Headless Automation
 
@@ -212,4 +212,3 @@ agent-browser get text body
 
 - [agent-browser Documentation](https://github.com/vercel-labs/agent-browser)
 - [ZeroClaw Configuration Reference](./config-reference.md)
-- [Skills Documentation](../skills/)

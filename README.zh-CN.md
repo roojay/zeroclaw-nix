@@ -69,23 +69,21 @@ ZeroClaw 是一个运行在你自己设备上的个人AI助手。它在你已经
 brew install zeroclaw
 ```
 
-### 一键安装
+### 构建安装
 
 ```bash
-git clone https://github.com/zeroclaw-labs/zeroclaw.git
-cd zeroclaw
-./install.sh
+git clone https://github.com/kcalvelli/zeroclaw-nix.git
+cd zeroclaw-nix
+cargo build --release
 ```
 
-`zeroclaw onboard` 在安装后自动运行，配置你的工作区和提供者。
+`zeroclaw onboard` 配置你的工作区和提供者。
 
 ## 快速开始（简版）
 
-完整新手指南（认证、配对、频道）：[入门指南](docs/setup-guides/one-click-bootstrap.md)
-
 ```bash
-# 安装 + 引导
-./install.sh --api-key "sk-..." --provider openrouter
+# 构建 + 引导
+cargo run --release -- onboard
 
 # 启动网关（webhook 服务器 + 网页仪表板）
 zeroclaw gateway                # 默认：127.0.0.1:42617
@@ -141,7 +139,7 @@ zeroclaw migrate openclaw
 
 ZeroClaw 连接到真实的消息平台。将入站 DM 视为不可信输入。
 
-完整安全指南：[SECURITY.md](SECURITY.md)
+完整安全指南：参见 `docs/security/` 目录下的文档。
 
 所有频道的默认行为：
 
@@ -542,12 +540,12 @@ zeroclaw completions zsh > ~/.zfunc/_zeroclaw
    cargo --version
    ```
 
-#### 一行安装
+#### 从源码构建
 
-或者跳过上述步骤，使用单条命令安装所有内容（系统依赖、Rust、ZeroClaw）：
+可以直接使用 Cargo 构建：
 
 ```bash
-curl -LsSf https://raw.githubusercontent.com/zeroclaw-labs/zeroclaw/master/install.sh | bash
+cargo build --release
 ```
 
 #### 编译资源需求
@@ -559,17 +557,7 @@ curl -LsSf https://raw.githubusercontent.com/zeroclaw-labs/zeroclaw/master/insta
 | **RAM + swap** | 2 GB | 4 GB+  |
 | **可用磁盘**   | 6 GB | 10 GB+ |
 
-如果你的主机低于最低要求，使用预构建二进制文件：
-
-```bash
-./install.sh --prefer-prebuilt
-```
-
-仅使用二进制安装，不回退到源码编译：
-
-```bash
-./install.sh --prebuilt-only
-```
+如果你的主机低于最低要求，请使用 Nix 或 Docker 构建。
 
 #### 可选
 
@@ -617,11 +605,9 @@ curl -LsSf https://raw.githubusercontent.com/zeroclaw-labs/zeroclaw/master/insta
 
 ### 协作文档
 
-- 贡献指南：[CONTRIBUTING.md](CONTRIBUTING.md)
 - PR 工作流策略：[docs/contributing/pr-workflow.md](docs/contributing/pr-workflow.md)
 - CI 工作流指南：[docs/contributing/ci-map.md](docs/contributing/ci-map.md)
 - 审查员手册：[docs/contributing/reviewer-playbook.md](docs/contributing/reviewer-playbook.md)
-- 安全披露策略：[SECURITY.md](SECURITY.md)
 - 文档模板：[docs/contributing/doc-template.md](docs/contributing/doc-template.md)
 
 ### 部署 + 运维
@@ -656,9 +642,7 @@ ZeroClaw 为 smooth crab 🦀 而构建，一个快速高效的 AI 助手。由 
 
 ## 贡献
 
-ZeroClaw 新手？寻找标记为 [`good first issue`](https://github.com/zeroclaw-labs/zeroclaw/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) 的问题 — 参阅我们的[贡献指南](CONTRIBUTING.md#first-time-contributors)了解如何开始。欢迎 AI/vibe-coded PR！🤖
-
-参见 [CONTRIBUTING.md](CONTRIBUTING.md) 和 [CLA.md](docs/contributing/cla.md)。实现一个 trait，提交 PR：
+参见 [CLA.md](docs/contributing/cla.md)。实现一个 trait，提交 PR：
 
 - CI 工作流指南：[docs/contributing/ci-map.md](docs/contributing/ci-map.md)
 - 新 `Provider` → `src/providers/`

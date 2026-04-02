@@ -46,7 +46,6 @@ Last reviewed: **February 18, 2026**.
 | `docs/config-reference.md`            | Current Reference            | operators              |
 | `docs/custom-providers.md`            | Current Integration Guide    | integration developers |
 | `docs/zai-glm-setup.md`               | Current Provider Setup Guide | users/operators        |
-| `docs/langgraph-integration.md`       | Current Integration Guide    | integration developers |
 | `docs/operations-runbook.md`          | Current Guide                | operators              |
 | `docs/troubleshooting.md`             | Current Guide                | users/operators        |
 | `docs/network-deployment.md`          | Current Guide                | operators              |

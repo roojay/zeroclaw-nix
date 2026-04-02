@@ -8,10 +8,10 @@
 
 ZeroClaw 可以通过 USB 从 Nucleo 读取芯片信息，**无需烧录任何固件**。向你的 Telegram 机器人发送消息：
 
-- *"我有什么开发板信息？"*
-- *"开发板信息"*
-- *"连接了什么硬件？"*
-- *"芯片信息"*
+- _"我有什么开发板信息？"_
+- _"开发板信息"_
+- _"连接了什么硬件？"_
+- _"芯片信息"_
 
 代理使用 `hardware_board_info` 工具返回芯片名称、架构和内存映射。启用 `probe` 特性时，它会通过 USB/SWD 读取实时数据；否则返回静态数据手册信息。
 
@@ -39,11 +39,10 @@ zeroclaw hardware discover
 
 ZeroClaw 包含 Nucleo-F401RE 所需的一切：
 
-| 组件 | 位置 | 目的 |
-|-----------|----------|---------|
-| 固件 | `firmware/nucleo/` | Embassy Rust — USART2（115200）、gpio_read、gpio_write |
-| 串门外设 | `src/peripherals/serial.rs` | 基于串口的 JSON 协议（与 Arduino/ESP32 相同） |
-| 烧录命令 | `zeroclaw peripheral flash-nucleo` | 构建固件，通过 probe-rs 烧录 |
+| 组件     | 位置                               | 目的                                          |
+| -------- | ---------------------------------- | --------------------------------------------- |
+| 串门外设 | `src/peripherals/serial.rs`        | 基于串口的 JSON 协议（与 Arduino/ESP32 相同） |
+| 烧录命令 | `zeroclaw peripheral flash-nucleo` | 构建固件，通过 probe-rs 烧录                  |
 
 协议：换行符分隔的 JSON。请求：`{"id":"1","cmd":"gpio_write","args":{"pin":13,"value":1}}`。响应：`{"id":"1","ok":true,"result":"done"}`。
 
@@ -72,13 +71,11 @@ ZeroClaw 包含 Nucleo-F401RE 所需的一切：
 zeroclaw peripheral flash-nucleo
 ```
 
-这会构建 `firmware/nucleo` 并运行 `probe-rs run --chip STM32F401RETx`。固件烧录后立即运行。
+这会运行 `probe-rs run --chip STM32F401RETx`。固件烧录后立即运行。
 
 ### 1.3 手动烧录（替代方案）
 
 ```bash
-cd firmware/nucleo
-cargo build --release --target thumbv7em-none-eabihf
 probe-rs run --chip STM32F401RETx target/thumbv7em-none-eabihf/release/nucleo
 ```
 
@@ -128,13 +125,13 @@ zeroclaw agent --message "Turn on the LED on pin 13"
 
 ## 命令摘要
 
-| 步骤 | 命令 |
-|------|---------|
-| 1 | 通过 USB 连接 Nucleo |
-| 2 | `cargo install probe-rs-tools --locked` |
-| 3 | `zeroclaw peripheral flash-nucleo` |
-| 4 | 将 Nucleo 添加到 config.toml（path = 你的串口） |
-| 5 | `zeroclaw daemon` 或 `zeroclaw agent -m "Turn on LED"` |
+| 步骤 | 命令                                                   |
+| ---- | ------------------------------------------------------ |
+| 1    | 通过 USB 连接 Nucleo                                   |
+| 2    | `cargo install probe-rs-tools --locked`                |
+| 3    | `zeroclaw peripheral flash-nucleo`                     |
+| 4    | 将 Nucleo 添加到 config.toml（path = 你的串口）        |
+| 5    | `zeroclaw daemon` 或 `zeroclaw agent -m "Turn on LED"` |
 
 ---
 

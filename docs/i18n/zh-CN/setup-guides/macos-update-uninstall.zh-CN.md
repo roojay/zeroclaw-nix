@@ -28,13 +28,13 @@ brew upgrade zeroclaw
 zeroclaw --version
 ```
 
-### B) 克隆 + 引导安装
+### B) 克隆 + 从源码构建
 
 在你本地的代码仓库目录中执行：
 
 ```bash
 git pull --ff-only
-./install.sh --prefer-prebuilt
+cargo build --release
 zeroclaw --version
 ```
 

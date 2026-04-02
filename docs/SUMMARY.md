@@ -20,7 +20,6 @@ Last refreshed: **February 18, 2026**.
 
 - [setup-guides/README.md](setup-guides/README.md)
 - [macos-update-uninstall.md](setup-guides/macos-update-uninstall.md)
-- [one-click-bootstrap.md](setup-guides/one-click-bootstrap.md)
 
 ### 2) Command/Config References & Integrations
 
@@ -32,7 +31,6 @@ Last refreshed: **February 18, 2026**.
 - [config-reference.md](reference/api/config-reference.md)
 - [custom-providers.md](contributing/custom-providers.md)
 - [zai-glm-setup.md](setup-guides/zai-glm-setup.md)
-- [langgraph-integration.md](contributing/langgraph-integration.md)
 
 ### 3) Operations & Deployment
 
@@ -67,7 +65,6 @@ Last refreshed: **February 18, 2026**.
 ### 6) Contribution & CI
 
 - [contributing/README.md](contributing/README.md)
-- [../CONTRIBUTING.md](../CONTRIBUTING.md)
 - [pr-workflow.md](contributing/pr-workflow.md)
 - [reviewer-playbook.md](contributing/reviewer-playbook.md)
 - [ci-map.md](contributing/ci-map.md)

@@ -12,13 +12,11 @@ Localized hubs:
 | I want to…                                      | Read this                                                                                  |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Install and run ZeroClaw quickly                | [README.md (Quick Start)](../README.md#quick-start)                                        |
-| Bootstrap in one command                        | [one-click-bootstrap.md](setup-guides/one-click-bootstrap.md)                              |
 | Update or uninstall on macOS                    | [macos-update-uninstall.md](setup-guides/macos-update-uninstall.md)                        |
 | Find commands by task                           | [commands-reference.md](reference/cli/commands-reference.md)                               |
 | Check config defaults and keys quickly          | [config-reference.md](reference/api/config-reference.md)                                   |
 | Configure custom providers/endpoints            | [custom-providers.md](contributing/custom-providers.md)                                    |
 | Configure Z.AI / GLM provider                   | [zai-glm-setup.md](setup-guides/zai-glm-setup.md)                                          |
-| Use LangGraph integration patterns              | [langgraph-integration.md](contributing/langgraph-integration.md)                          |
 | Operate runtime (day-2 runbook)                 | [operations-runbook.md](ops/operations-runbook.md)                                         |
 | Troubleshoot install/runtime/channel issues     | [troubleshooting.md](ops/troubleshooting.md)                                               |
 | Run Matrix encrypted-room setup and diagnostics | [matrix-e2ee-guide.md](security/matrix-e2ee-guide.md)                                      |
@@ -44,7 +42,6 @@ Localized hubs:
 - Security docs: [security/README.md](security/README.md)
 - Hardware/peripherals: [hardware/README.md](hardware/README.md)
 - Contributing/CI: [contributing/README.md](contributing/README.md)
-- Project snapshots: [maintainers/README.md](maintainers/README.md)
 
 ## By Audience
 
@@ -57,13 +54,11 @@ Localized hubs:
 - [config-reference.md](reference/api/config-reference.md) — high-signal config keys and secure defaults
 - [custom-providers.md](contributing/custom-providers.md) — custom provider/base URL integration templates
 - [zai-glm-setup.md](setup-guides/zai-glm-setup.md) — Z.AI/GLM setup and endpoint matrix
-- [langgraph-integration.md](contributing/langgraph-integration.md) — fallback integration for model/tool-calling edge cases
 - [operations-runbook.md](ops/operations-runbook.md) — day-2 runtime operations and rollback flow
 - [troubleshooting.md](ops/troubleshooting.md) — common failure signatures and recovery steps
 
 ### Contributors / Maintainers
 
-- [../CONTRIBUTING.md](../CONTRIBUTING.md)
 - [pr-workflow.md](contributing/pr-workflow.md)
 - [reviewer-playbook.md](contributing/reviewer-playbook.md)
 - [ci-map.md](contributing/ci-map.md)

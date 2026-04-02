@@ -46,7 +46,6 @@
 | `docs/config-reference.md`            | 当前参考           | 运维人员      |
 | `docs/custom-providers.md`            | 当前集成指南       | 集成开发者    |
 | `docs/zai-glm-setup.md`               | 当前提供商设置指南 | 用户/运维人员 |
-| `docs/langgraph-integration.md`       | 当前集成指南       | 集成开发者    |
 | `docs/operations-runbook.md`          | 当前指南           | 运维人员      |
 | `docs/troubleshooting.md`             | 当前指南           | 用户/运维人员 |
 | `docs/network-deployment.md`          | 当前指南           | 运维人员      |

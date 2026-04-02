@@ -15,7 +15,7 @@ Symptom:
 Fix:
 
 ```bash
-./install.sh --install-rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
 Or install from <https://rustup.rs/>.
@@ -28,9 +28,7 @@ Symptom:
 
 Fix:
 
-```bash
-./install.sh --install-system-deps
-```
+Install build dependencies via your package manager (e.g. `apt install build-essential pkg-config libssl-dev` on Debian/Ubuntu).
 
 ### Build fails on low-RAM / low-disk hosts
 
@@ -45,17 +43,7 @@ Why this happens:
 - Full source build can require **2 GB RAM + swap** and **6+ GB free disk**.
 - Enabling swap on a tiny disk can avoid RAM OOM but still fail due to disk exhaustion.
 
-Preferred path for constrained machines:
-
-```bash
-./install.sh --prefer-prebuilt
-```
-
-Binary-only mode (no source fallback):
-
-```bash
-./install.sh --prebuilt-only
-```
+Preferred path for constrained machines: use Nix build or Docker.
 
 If you must compile from source on constrained hosts:
 
@@ -215,10 +203,10 @@ Linux logs:
 journalctl --user -u zeroclaw.service -f
 ```
 
-## Installer URL
+## Build from Source
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/zeroclaw-labs/zeroclaw/master/install.sh | bash
+cargo build --release
 ```
 
 ## Still Stuck?

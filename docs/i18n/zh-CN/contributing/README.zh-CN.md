@@ -4,7 +4,6 @@
 
 ## 核心政策
 
-- 贡献指南：[../../../../CONTRIBUTING.md](../../../../CONTRIBUTING.md)
 - PR 工作流规则：[./pr-workflow.zh-CN.md](./pr-workflow.zh-CN.md)
 - 评审者手册：[./reviewer-playbook.zh-CN.md](./reviewer-playbook.zh-CN.md)
 - CI 地图和所有权：[./ci-map.zh-CN.md](./ci-map.zh-CN.md)
@@ -14,7 +13,6 @@
 
 ## 建议阅读顺序
 
-1. `CONTRIBUTING.md`
-2. `pr-workflow.md`
-3. `reviewer-playbook.md`
-4. `ci-map.md`
+1. `pr-workflow.md`
+2. `reviewer-playbook.md`
+3. `ci-map.md`

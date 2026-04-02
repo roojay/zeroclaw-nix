@@ -16,7 +16,7 @@ Full pre-PR validation (recommended):
 ./dev/ci.sh all
 ```
 
-Docs-only changes: run markdown lint and link-integrity checks. If touching bootstrap scripts: `bash -n install.sh`.
+Docs-only changes: run markdown lint and link-integrity checks.
 
 ## Project Snapshot
 
@@ -69,6 +69,7 @@ When uncertain, classify as higher risk.
 6. **Queue hygiene** — stacked PR: declare `Depends on #...`. Replacing old PR: declare `Supersedes #...`.
 
 Branch/commit/PR rules:
+
 - Work from a non-`master` branch. Open a PR to `master`; do not push directly.
 - Use conventional commit titles. Prefer small PRs (`size: XS/S/M`).
 - Follow `.github/pull_request_template.md` fully.
